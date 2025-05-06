@@ -4,7 +4,7 @@ test:
 		echo $$TEST
 
 build-minideb:
-	docker build -t trixie-build -f minideb-trixie-build.Dockerfile .
+	docker build --platform linux/amd64 -t trixie-build -f minideb-trixie-build.Dockerfile .
 	./extract-image.sh
 
 build-mongo:

@@ -12,11 +12,11 @@ LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3dae
       org.opencontainers.image.description="Original Application packaged by Broadcom, Inc., modified by dlavrenuek" \
       org.opencontainers.image.documentation="https://github.com/dlavrenuek/bitnami-mongodb-arm/blob/main/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.15-debian-12-r2" \
+      org.opencontainers.image.ref.name="7.0.20-debian-12-r2" \
       org.opencontainers.image.source="https://github.com/dlavrenuek/bitnami-mongodb-arm" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="7.0.15"
+      org.opencontainers.image.version="7.0.20"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -115,7 +115,7 @@ ENV MONGO_MAJOR 7.0
 RUN echo "deb [ signed-by=/etc/apt/keyrings/mongodb.asc ] http://$MONGO_REPO/apt/ubuntu jammy/${MONGO_PACKAGE%-unstable}/$MONGO_MAJOR multiverse" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%-unstable}.list"
 
 # https://docs.mongodb.org/master/release-notes/7.0/
-ENV MONGO_VERSION 7.0.15
+ENV MONGO_VERSION 7.0.20
 # 02/19/2025, https://github.com/mongodb/mongo/tree/f099987179b0e9919aa2fcba25afe48f35e53ae9
 
 # CHANGE: remove ${MONGO_PACKAGE}-shell=$MONGO_VERSION as it is installed in
@@ -150,7 +150,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="7.0.15" \
+ENV APP_VERSION="7.0.20" \
     BITNAMI_APP_NAME="mongodb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 

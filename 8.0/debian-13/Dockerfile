@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 # CHANGE: use minideb:trixie - for now custom build untill officially supported by bitnami
-FROM docker.io/bitnami/minideb:trixie
+FROM docker.io/bitnami/minideb:trixie-${TARGETARCH:-amd64}
 
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
@@ -13,11 +13,11 @@ LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3dae
       org.opencontainers.image.description="Original Application packaged by Broadcom, Inc., modified by dlavrenuek" \
       org.opencontainers.image.documentation="https://github.com/dlavrenuek/bitnami-mongodb-arm/blob/main/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.4-debian-13" \
+      org.opencontainers.image.ref.name="8.0.9-debian-13" \
       org.opencontainers.image.source="https://github.com/dlavrenuek/bitnami-mongodb-arm" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.0.4"
+      org.opencontainers.image.version="8.0.9"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 # CHANGE: "mongodb-shell-2.3.4-0-linux-${OS_ARCH}-debian-12" is removed from list because it is not available as arm64
-# CHANGE: "mongodb-8.0.4-0-linux-${OS_ARCH}-debian-12" removed because it will be built as part of mongodb image
+# CHANGE: "mongodb-8.0.9-0-linux-${OS_ARCH}-debian-12" removed because it will be built as part of mongodb image
 # CHANGE: update/change libraries
 #  libldap-2.5-0 -> libldap2
 #  libnettle8 -> libnettle8t64
@@ -123,7 +123,7 @@ ENV MONGO_MAJOR 8.0
 RUN echo "deb [ signed-by=/etc/apt/keyrings/mongodb.asc ] http://$MONGO_REPO/apt/ubuntu noble/${MONGO_PACKAGE%-unstable}/$MONGO_MAJOR multiverse" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%-unstable}.list"
 
 # https://docs.mongodb.org/master/release-notes/8.0/
-ENV MONGO_VERSION 8.0.4
+ENV MONGO_VERSION 8.0.9
 # 11/27/2024, https://github.com/mongodb/mongo/tree/bc35ab4305d9920d9d0491c1c9ef9b72383d31f9
 
 RUN set -x \
@@ -158,7 +158,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="8.0.4" \
+ENV APP_VERSION="8.0.9" \
     BITNAMI_APP_NAME="mongodb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 

@@ -11,11 +11,11 @@ LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf780258
       org.opencontainers.image.created="2024-02-19T15:15:11Z" \
       org.opencontainers.image.description="Original Application packaged by VMware, Inc., modified by dlavrenuek" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.0.13-debian-11-r21" \
+      org.opencontainers.image.ref.name="6.0.23-debian-11-r21" \
       org.opencontainers.image.source="https://github.com/dlavrenuek/bitnami-mongodb-arm" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.13"
+      org.opencontainers.image.version="6.0.23"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-# CHANGE: "mongodb-6.0.13-4-linux-${OS_ARCH}-debian-11" is removed from list because it is not available as arm64
+# CHANGE: "mongodb-6.0.23-4-linux-${OS_ARCH}-debian-11" is removed from list because it is not available as arm64
 # CHANGE: "mongodb-shell-2.1.4-0-linux-${OS_ARCH}-debian-11" removed because it will be built as part of mongodb image
 # CHANGE: update package versions to match debian 12 compatibility
 # libffi7 -> libffi8
@@ -129,7 +129,7 @@ ENV MONGO_MAJOR=6.0
 RUN echo "deb [ signed-by=/etc/apt/keyrings/mongodb.asc ] http://$MONGO_REPO/apt/ubuntu jammy/${MONGO_PACKAGE%-unstable}/$MONGO_MAJOR multiverse" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%-unstable}.list"
 
 # https://docs.mongodb.org/master/release-notes/6.0/
-ENV MONGO_VERSION=6.0.13
+ENV MONGO_VERSION=6.0.23
 # 10/17/2024, https://github.com/mongodb/mongo/tree/a7ada5ff3a4d8a1e2ed88f86bd6b3d1d16cb43c6
 
 RUN set -x \
@@ -163,7 +163,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="6.0.13" \
+ENV APP_VERSION="6.0.23" \
     BITNAMI_APP_NAME="mongodb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 

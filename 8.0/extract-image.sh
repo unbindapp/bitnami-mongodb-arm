@@ -8,10 +8,10 @@ tar -xvf ./trixie-export.tar
 
 # import to local docker registry
 ID=$(docker load -i ./export.tar | awk '{print $4}')
-docker tag "$ID" "bitnami/minideb:trixie"
+docker tag "$ID" "bitnami/minideb:trixie-amd64"
 
 # clean u temporary files
 rm ./trixie-export.tar
 rm ./export.tar
 
-echo "successfully built and tagged bitnami/minideb:trixie"
+echo "successfully built and tagged bitnami/minideb:trixie-amd64"
